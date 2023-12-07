@@ -13,7 +13,7 @@ This layout is organic and keeps evolving based on:
 
 - real needs: reduce hand gestures, reduce frequently used keystrokes, etc.
 - exploration need: custom keebs offer a brand new experience and I love to explore what is possible out there
-- only 2 keys per thumb (because I have no idea why I would need more, submit an issue to suggest something ^^)
+ 
 
 It's not a surprise that this keymap is a hybrid. It was inspired by 2 opposite approaches:
 
@@ -60,9 +60,12 @@ I'm very happy about this "limitation" because it forced me to learn better ways
 
 Add this repos as a git submodule inside the `qmk_firmware/keyboards/cantor/keymaps` folder:
 
-```
+```shell
 cd qmk_firmware/keyboards/cantor/keymaps
 git submodule add https://github.com/malparty/xavv1-remix.git
+cd ../../../
+make git-submodule
+cd keyboards/cantor/keymaps/xavv1-remix
 ```
 
 ## Compile and flash
