@@ -31,5 +31,5 @@
 #define USB_SUSPEND_WAKEUP_DELAY 800
 
 /* Fix the tap mod issue that acts like PERMISSIVE_HOLD is always ON: */
-#define IGNORE_MOD_TAP_INTERRUPT
+// #define IGNORE_MOD_TAP_INTERRUPT
 #define PERMISSIVE_HOLD
