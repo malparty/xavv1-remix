@@ -2,10 +2,10 @@
 
 ## Keymap
 
-_Figma layouts made thanks to [@madhanparthasar](https://www.figma.com/@madhanparthasar)'s [Ortholinear Keyboard Keybinding Layout Tool
+_Figma layout made thanks to [@madhanparthasar](https://www.figma.com/@madhanparthasar)'s [Ortholinear Keyboard Keybinding Layout Tool
 ](https://www.figma.com/community/file/1283154322826272613)_ 🙌
 
-<img src="images/combos.png" alt="Keymap to see all layers and combos" />
+<img src="images/keymap.png" alt="Keymap to see all layers and combos" />
 
 ## Origins
 
@@ -13,7 +13,6 @@ This layout is organic and keeps evolving based on:
 
 - real needs: reduce hand gestures, reduce frequently used keystrokes, etc.
 - exploration need: custom keebs offer a brand new experience and I love to explore what is possible out there
- 
 
 It's not a surprise that this keymap is a hybrid. It was inspired by 2 opposite approaches:
 
@@ -25,27 +24,32 @@ It's not a surprise that this keymap is a hybrid. It was inspired by 2 opposite 
   - Avoid unnecessary complications.
 - [Kombol](https://github.com/skychil/kombol) – a combo-optimized keymapping. This extends Miryoku and removes some confusion for keys like `[]`, `{}`, `()`, `-=+`, `' "`, `; :`, ... that I had some hard time mastering with Miryoku.
 
-The QMK code is inspired by the [aurora sweep_keymap from flinguenheld](https://github.com/flinguenheld/sweep_keymap) and the default Cantor keymap.
-
-My code is probably NOT clean, I would NOT recommend using it as a starting point to create a brand new keymap.
-But you can explore some features and take the pieces you want.
+The QMK code is inspired by the [sweep_keymap from flinguenheld](https://github.com/flinguenheld/sweep_keymap).
 
 ### Tap Dance
 
-#### Thumbs layer switches
+#### Apps shortcuts doubled with long-tap
 
-The default QMK behavior was not working for me. Imagine you have a number layer, activated with a [Momentary layer switch "MO(layer)"](https://docs.qmk.fm/#/keycodes?id=layer-switching). Now you also have the "backspace" key on that same key.
+You'll find some tap-dance actions on the `_MOUSE` layer. For example: `TD(TD_BROWSER)`.
+This allows the keyboard to respond to 2 different events: normal tap and long tap (down until the tapping term, then up).
 
-- Keep the key down, it momentarily switches to the layer
-- Release the key, it comes back to the root layer
-- Tap the key, it triggers a backspace
+I use that for:
 
-This sounds all good. But now, you need to type a phone number quickly.
-Snap! You made a mistake with the numbers, let's lightning-fast `backspace` it and retype. Then reselect the layer.
-That's where QMK implementation of the `MO` switch was not OK to me. When you reselect the layer, if you are under the `TAPPING_TERM` (200ms) time since you tapped `backspace`, it will tap `backspace` again, even when stay pressed on the key; and the layer would no activate either.
+- Browser: short tap is working/codding (Chrome) / long tap is personal browser (Brave).
+- GitHub App / Figma App: as Figma is less used, it is mapped to the long tap.
+- Rectangle (windows management for Mac): a normal tap moves the windows on another screen and a long tap makes the window full-screen.
 
-This was quite frustrating to me. Especially that my ErgoDox EZ nailed this part.
-To solve this, I implemented the `features/tap_dance.c` part.
+See `features/tap_dance.c` for the implementation.
+
+### Refinements
+
+- `#define QUICK_TAP_TERM 0` disable the `QUICK_TAP_TERM`.
+  This allows double-tapping a modifier key (and holding it on the second tap) and getting the hold action triggered.
+  In the context of this keyboard, a simple example is
+  "you tipped a wrong number, correct it with `tap BCKSP` then `hold BCKSP` (NUM LAYER) then your number.
+  The double `BACKSP` requires activating the layer, not to switch to `QUICK_TAP_TERM` and repeat your backspace.
+- This layout CANNOT use `#define HOLD_ON_OTHER_KEY_PRESS` due to the home-row modifier:
+  this feature allows modifiers to trigger faster but prevents from rolling the home-row keys.
 
 ### Arbitrations
 

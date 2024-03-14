@@ -22,14 +22,11 @@
 // The default is 40
 #define MOUSEKEY_WHEEL_TIME_TO_MAX 100
 
+/* added to try resolve wake up issue: */
+// #define SPLIT_USB_DETECT
+// #define USB_SUSPEND_WAKEUP_DELAY 800
+
 /* Tap dance */
 #define TAPPING_TERM 200
-// #define TAPPING_TERM_PER_KEY
-
-/* added to try resolve wake up issue: */
-#define SPLIT_USB_DETECT
-#define USB_SUSPEND_WAKEUP_DELAY 800
-
-/* Fix the tap mod issue that acts like PERMISSIVE_HOLD is always ON: */
-// #define IGNORE_MOD_TAP_INTERRUPT
-#define PERMISSIVE_HOLD
+#define TAPPING_TERM_PER_KEY
+#define QUICK_TAP_TERM 0
