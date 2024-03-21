@@ -10,15 +10,14 @@ char send_string_fast_actions[][20] = {
     "xavier@malparty.fr",
     "Malparty",
     "Xavier",
-    "",
-    "",
     "gttt ",
     "git push --force\n",
     "Thanks :pray: ",
     "Nice catch! ",
     ":white_check_mark: ",
     ":harold: ",
-    "è",
+    "the",
+    "and",
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
