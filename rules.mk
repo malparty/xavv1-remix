@@ -1,6 +1,5 @@
 LTO_ENABLE = yes
 
-SRC += features/tap_dance.c
 INTROSPECTION_KEYMAP_C += features/combo.c # Replace SRC, see issue #21137
 
 MOUSEKEY_ENABLE = yes
