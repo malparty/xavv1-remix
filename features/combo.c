@@ -148,5 +148,5 @@ combo_t key_combos[] = {
 
     [COMBO_QUIT] = COMBO(combo_quit, LGUI(KC_Q)),
     [COMBO_THE] = COMBO(combo_the, SS_THE),
-    [COMBO_AND] = COMBO(combo_and, KC_Q),
+    [COMBO_AND] = COMBO(combo_and, SS_AND),
 };
