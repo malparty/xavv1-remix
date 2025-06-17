@@ -195,7 +195,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
               KC_NO, LT(_MOUSE2, KC_Z)       ,       KC_X       ,       KC_C       ,       KC_D       ,       KC_V      ,           KC_K       ,      KC_H        ,     KC_COMM      ,      KC_DOT      ,LT(_RGB, KC_SLSH) ,KC_NO,
     //|------------------+------------------+------------------+------------------+-----------------|   |------------------+------------------+------------------+------------------+------------------|
     //                                           |-------------------------+-------------------------| |-------------------------+-------------------------|
-                                        QK_REP    ,    LT(_MOUSE, KC_TAB)   ,     LT(_NAV, KC_SPC)    ,     LT(_NUM, KC_BSPC)     ,    LT(_SYM, KC_ENTER)   ,    LT(_SENDSTR, KC_Q)
+                                        KC_NO    ,    LT(_MOUSE, KC_TAB)   ,     LT(_NAV, KC_SPC)    ,     LT(_NUM, KC_BSPC)     ,    LT(_SYM, KC_ENTER)   ,    KC_NO
     //                                           |-------------------------+-------------------------| |-------------------------+-------------------------|
     ),
 	[_MOUSE] = LAYOUT_split_3x6_3(
