@@ -6,7 +6,7 @@ char send_string_actions[][10] = {
 };
 
 char send_string_fast_actions[][20] = {
-    "xavier@nimblehq.co",
+    "xavv1m@gmail.com",
     "xavier@malparty.fr",
     "Malparty",
     "Xavier",
@@ -72,8 +72,8 @@ void tap_dance_tap_hold_reset(tap_dance_state_t *state, void *user_data) {
     { .fn = {NULL, tap_dance_tap_hold_finished, tap_dance_tap_hold_reset}, .user_data = (void *)&((tap_dance_tap_hold_layer_t){tap, hold, 0}), }
 
 tap_dance_action_t tap_dance_actions[] = {
-    [TD_BROWSER] = ACTION_TAP_DANCE_TAP_HOLD(LGUI(KC_3), LGUI(KC_6)),
-    [TD_GITFIGMA] = ACTION_TAP_DANCE_TAP_HOLD(LGUI(KC_2), LGUI(KC_5)),
+    [TD_BROWSER] = ACTION_TAP_DANCE_TAP_HOLD(LGUI(KC_1), LGUI(KC_6)),
+    [TD_GITFIGMA] = ACTION_TAP_DANCE_TAP_HOLD(LGUI(KC_5), LGUI(KC_7)),
     [TD_RECTANGLE] = ACTION_TAP_DANCE_TAP_HOLD(LGUI(LOPT(LCTL(KC_LEFT))), LOPT(LCTL(KC_ENT))),
 };
 
@@ -199,7 +199,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //                                           |-------------------------+-------------------------| |-------------------------+-------------------------|
     ),
 	[_MOUSE] = LAYOUT_split_3x6_3(
-            KC_NO, TD(TD_GITFIGMA), TD(TD_BROWSER), LGUI(KC_1), LGUI(KC_7), LGUI(KC_4),        KC_NO,     KC_NO,      KC_NO,      KC_NO,      KC_NO,  KC_NO,
+            KC_NO, TD(TD_GITFIGMA), TD(TD_BROWSER), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4),        KC_NO,     KC_NO,      KC_NO,      KC_NO,      KC_NO,  KC_NO,
             KC_NO, KC_LGUI,         KC_LOPT,        KC_LCTL,    KC_LSFT,    LGUI(LSFT(KC_E)),  KC_NO,     KC_MS_L,    KC_MS_D,    KC_MS_U,    KC_MS_R,KC_NO,
             KC_NO, KC_LEFT,         KC_UP,          KC_DOWN,    KC_RGHT,    TD(TD_RECTANGLE),  KC_BTN3,   KC_WH_L,    KC_WH_U,    KC_WH_D,    KC_WH_R,KC_NO,
                                                          KC_TRNS, KC_TRNS,    KC_NO,             KC_BTN2,   KC_BTN1, KC_NO
@@ -211,9 +211,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       KC_TRNS, KC_TRNS,    KC_NO,          KC_BTN2,   KC_BTN1, KC_NO
         ),
 	[_NAV] = LAYOUT_split_3x6_3(
-            KC_NO, LGUI(KC_Z), LGUI(KC_X), LGUI(KC_C), LGUI(KC_V), RSG(KC_Z),      KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,KC_NO,
-        KC_NO, KC_LGUI, KC_LOPT, KC_LCTL, KC_LSFT, LGUI(KC_A),                     KC_NO, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT,KC_NO,
-            KC_NO, LGUI(LSFT(KC_T)), LCTL(KC_C), KC_BSPC, KC_ENT, KC_BTN1,         KC_NO, KC_HOME, KC_PGDN, KC_PGUP, KC_END,KC_NO,
+            KC_NO, LCTL(KC_Z), LCTL(KC_X), LCTL(KC_C), LCTL(KC_V), RSG(KC_Z),      KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,KC_NO,
+        KC_NO, KC_LGUI, KC_LOPT, KC_LCTL, KC_LSFT, LCTL(KC_A),                     KC_NO, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT,KC_NO,
+            KC_NO, LCTL(LSFT(KC_T)), LGUI(KC_A), KC_BSPC, KC_ENT, KC_BTN1,         KC_NO, KC_HOME, KC_PGDN, KC_PGUP, KC_END,KC_NO,
                                         KC_TRNS, KC_NO, KC_TRNS,                     KC_TRNS, KC_TRNS, KC_NO
         ),
 	[_NUM] = LAYOUT_split_3x6_3(
