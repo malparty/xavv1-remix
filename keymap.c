@@ -250,7 +250,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         ),
 	[_NAV] = LAYOUT_split_3x6_3(
             KC_NO, LCTL(KC_Z), LCTL(KC_X), LCTL(KC_C), LCTL(KC_V), RSG(KC_Z),      KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,KC_NO,
-        KC_NO, KC_LGUI, KC_LOPT, KC_LCTL, KC_LSFT, LCTL(KC_A),                     KC_NO, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT,KC_NO,
+        KC_NO, KC_LGUI, KC_LOPT, KC_LCTL, KC_LSFT, LCTL(KC_S),                     KC_NO, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT,KC_NO,
             KC_NO, LCTL(LSFT(KC_T)), LCTL(KC_C), KC_BSPC, KC_ENT, KC_BTN1,         KC_NO, KC_HOME, KC_PGDN, KC_PGUP, KC_END,KC_NO,
                                         KC_TRNS, KC_NO, KC_TRNS,                     KC_TRNS, KC_TRNS, KC_NO
         ),
