@@ -63,21 +63,21 @@ uint16_t COMBO_LEN = COMBO_LENGTH;
 
 /* Sequences fo keys */
 /* Diacritics */
-const uint16_t PROGMEM combo_a_grave[] = {MT(MOD_LGUI, KC_A), KC_X, COMBO_END};
-const uint16_t PROGMEM combo_a_circumflex[] = {MT(MOD_LGUI, KC_A), KC_Z, COMBO_END};
-const uint16_t PROGMEM combo_e_grave[] = {MT(MOD_RCTL, KC_E), KC_DOT, COMBO_END};
-const uint16_t PROGMEM combo_e_aigu[] = {MT(MOD_RCTL, KC_E), KC_Y, COMBO_END};
-const uint16_t PROGMEM combo_e_circumflex[] = {MT(MOD_RCTL, KC_E), KC_COMM, COMBO_END};
+const uint16_t PROGMEM combo_a_grave[] = {MT(MOD_LCTL, KC_A), KC_X, COMBO_END};
+const uint16_t PROGMEM combo_a_circumflex[] = {MT(MOD_LCTL, KC_A), KC_Z, COMBO_END};
+const uint16_t PROGMEM combo_e_grave[] = {MT(MOD_RGUI, KC_E), KC_DOT, COMBO_END};
+const uint16_t PROGMEM combo_e_aigu[] = {MT(MOD_RGUI, KC_E), KC_Y, COMBO_END};
+const uint16_t PROGMEM combo_e_circumflex[] = {MT(MOD_RGUI, KC_E), KC_COMM, COMBO_END};
 const uint16_t PROGMEM combo_i_circumflex[] = {MT(MOD_RALT, KC_I), KC_DOT, COMBO_END};
-const uint16_t PROGMEM combo_u_circumflex[] = {MT(MOD_RCTL, KC_E), KC_U, COMBO_END};
+const uint16_t PROGMEM combo_u_circumflex[] = {MT(MOD_RGUI, KC_E), KC_U, COMBO_END};
 const uint16_t PROGMEM combo_u_grave[] = {KC_U, MT(MOD_RALT, KC_I), COMBO_END};
-const uint16_t PROGMEM combo_o_circumflex[] = {MT(MOD_RGUI, KC_O), LT(_RGB, KC_SLSH), COMBO_END};
+const uint16_t PROGMEM combo_o_circumflex[] = {MT(MOD_RCTL, KC_O), LT(_RGB, KC_SLSH), COMBO_END};
 const uint16_t PROGMEM combo_c_cedi[] = {KC_C, MT(MOD_LSFT, KC_T), COMBO_END};
 
 const uint16_t PROGMEM combo_caps[] = {KC_W, KC_F, KC_P, COMBO_END};
 
 /* ' " ` */
-const uint16_t PROGMEM combo_quote[] = {MT(MOD_LALT, KC_R),MT(MOD_LCTL, KC_S),MT(MOD_LSFT, KC_T), COMBO_END};
+const uint16_t PROGMEM combo_quote[] = {MT(MOD_LALT, KC_R),MT(MOD_LGUI, KC_S),MT(MOD_LSFT, KC_T), COMBO_END};
 const uint16_t PROGMEM combo_dquote[] = {KC_X, KC_C, KC_D, COMBO_END};
 const uint16_t PROGMEM combo_bquot[] = {KC_L, KC_U, KC_Y, COMBO_END};
 
@@ -93,13 +93,13 @@ const uint16_t PROGMEM combo_rche[] = {KC_COMM, KC_DOT, COMBO_END};
 
 /* - + = _ */
 const uint16_t PROGMEM combo_minus[] = {MT(MOD_LALT, KC_R), KC_W, COMBO_END};
-const uint16_t PROGMEM combo_eq[] = {MT(MOD_LCTL, KC_S), KC_F, COMBO_END};
+const uint16_t PROGMEM combo_eq[] = {MT(MOD_LGUI, KC_S), KC_F, COMBO_END};
 const uint16_t PROGMEM combo_plus[] = {MT(MOD_LSFT, KC_T), KC_P, COMBO_END};
 const uint16_t PROGMEM combo_undscore[] = {MT(MOD_LALT, KC_R), KC_X, COMBO_END};
 
 /* ; : ~ | \ */
 const uint16_t PROGMEM combo_semicol[] = {KC_H, KC_COMM, KC_DOT, COMBO_END};
-const uint16_t PROGMEM combo_col[] = {MT(MOD_RSFT, KC_N), MT(MOD_RCTL, KC_E), MT(MOD_RALT, KC_I), COMBO_END};
+const uint16_t PROGMEM combo_col[] = {MT(MOD_RSFT, KC_N), MT(MOD_RGUI, KC_E), MT(MOD_RALT, KC_I), COMBO_END};
 const uint16_t PROGMEM combo_tilde[] = {MT(MOD_RALT, KC_I), KC_Y, COMBO_END};
 const uint16_t PROGMEM combo_pipe[] = {MT(MOD_RSFT, KC_N), KC_L, COMBO_END};
 const uint16_t PROGMEM combo_bckslash[] = {MT(MOD_RSFT, KC_N), KC_H, COMBO_END};
@@ -146,7 +146,7 @@ combo_t key_combos[] = {
     [COMBO_TILDE] = COMBO(combo_tilde, KC_TILD),
     [COMBO_BCKSLASH] = COMBO(combo_bckslash, KC_BSLS),
 
-    [COMBO_QUIT] = COMBO(combo_quit, LGUI(KC_Q)),
+    [COMBO_QUIT] = COMBO(combo_quit, LGUI(KC_W)),
     [COMBO_THE] = COMBO(combo_the, SS_THE),
     [COMBO_AND] = COMBO(combo_and, SS_AND),
 };
