@@ -152,55 +152,61 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     else if (keycode == SS_E_GRAVE) {
         if (record->event.pressed) {
-            SEND_STRING(SS_LOPT("`") "e");
+            SEND_STRING(SS_TAP(X_CAPS) "`e");
         }
         return false;
     }
     else if (keycode == SS_A_GRAVE) {
         if (record->event.pressed) {
-            SEND_STRING(SS_LOPT("`") "a");
+            SEND_STRING(SS_TAP(X_CAPS) "`a");
         }
         return false;
     }
     else if (keycode == SS_U_GRAVE) {
         if (record->event.pressed) {
-            SEND_STRING(SS_LOPT("`") "u");
+            SEND_STRING(SS_TAP(X_CAPS) "`u");
         }
         return false;
     }
     else if (keycode == SS_E_AIGU) {
         if (record->event.pressed) {
-            SEND_STRING(SS_LOPT("e") "e");
+            SEND_STRING(SS_TAP(X_CAPS) "'e");
         }
         return false;
     }
     else if (keycode == SS_A_CIRCUMFLEX) {
         if (record->event.pressed) {
-            SEND_STRING(SS_LOPT("i") "a");
+            SEND_STRING(SS_TAP(X_CAPS) "^a");
         }
         return false;
     }
     else if (keycode == SS_E_CIRCUMFLEX) {
         if (record->event.pressed) {
-            SEND_STRING(SS_LOPT("i") "e");
+            SEND_STRING(SS_TAP(X_CAPS) "^e");
         }
         return false;
     }
     else if (keycode == SS_I_CIRCUMFLEX) {
         if (record->event.pressed) {
-            SEND_STRING(SS_LOPT("i") "i");
+            SEND_STRING(SS_TAP(X_CAPS) "^i");
         }
         return false;
     }
     else if (keycode == SS_U_CIRCUMFLEX) {
         if (record->event.pressed) {
-            SEND_STRING(SS_LOPT("i") "u");
+            SEND_STRING(SS_TAP(X_CAPS) "^u");
         }
         return false;
     }
     else if (keycode == SS_O_CIRCUMFLEX) {
         if (record->event.pressed) {
-            SEND_STRING(SS_LOPT("i") "o");
+            SEND_STRING(SS_TAP(X_CAPS) "^o");
+        }
+        return false;
+    }
+    else if (keycode == SS_C_CEDI) {
+        if (record->event.pressed) {
+            SEND_STRING(SS_TAP(X_CAPS) ",c");
         }
         return false;
     }
