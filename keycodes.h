@@ -10,6 +10,7 @@ enum custom_layers {
     _NAV,
     _NUM,
     _SYM,
+    _GAME,
     _SENDSTR,
     _RGB,
 };
