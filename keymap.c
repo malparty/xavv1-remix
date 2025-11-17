@@ -267,16 +267,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 KC_TRNS, KC_0, KC_DOT,                               KC_TRNS, KC_NO, KC_NO
         ),
 	[_SYM] = LAYOUT_split_3x6_3(
-            KC_NO, KC_LCBR, KC_AMPR, KC_ASTR, KC_MINS, KC_RCBR,                    TO(_GAME), TO(_GAME),   TO(_GAME), TO(_GAME), TO(_BASE), KC_NO,
+            KC_NO, KC_LCBR, KC_AMPR, KC_ASTR, KC_MINS, KC_RCBR,                    TO(_GAME), TO(_GAME),   TO(_GAME), TO(_GAME), TO(_GAME), KC_NO,
             KC_NO, KC_COLN, KC_DLR, KC_PERC, KC_CIRC, KC_PLUS,                     KC_NO, KC_LSFT, KC_LGUI, KC_LALT, KC_LCTL,KC_NO,
             KC_NO, KC_TILD, KC_EXLM, KC_AT, KC_HASH, KC_PIPE,                      KC_NO, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT,KC_NO,
                                      KC_TRNS, KC_LPRN, KC_RPRN,                      KC_NO, KC_TRNS, KC_NO
         ),
     [_GAME] = LAYOUT_split_3x6_3(
-        KC_NO, KC_NO, KC_Q, KC_W, KC_E, KC_R,                 KC_NO, KC_NO,   KC_NO,   KC_NO,   KC_NO, KC_NO,
+        KC_NO, KC_C, KC_Q, KC_W, KC_E, KC_R,                 KC_NO, KC_NO,   KC_NO,   KC_NO,   KC_NO, KC_NO,
         KC_NO, KC_LSFT, KC_A, KC_S, KC_D, KC_F,                 KC_NO, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_LSFT, 
-        KC_NO, KC_0, KC_1, KC_2, KC_3, KC_4,                  KC_NO, KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_NO, 
-                       KC_NO, KC_LCTL, KC_SPC,                 KC_TRNS, KC_TRNS, KC_NO
+        KC_NO, KC_1, KC_2, KC_3, KC_4, KC_5,                  KC_NO, KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_NO, 
+                       KC_NO, KC_LCTL, KC_SPC,                 KC_TRNS, KC_TRNS, TO(_BASE)
         ),
 	[_SENDSTR] = LAYOUT_split_3x6_3(
             KC_NO, SS_FNAME, SS_LNAME, SS_NC, SS_TX,    SS_GITCM,                  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,KC_NO,
