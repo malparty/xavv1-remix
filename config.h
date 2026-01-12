@@ -23,8 +23,9 @@
 #define MOUSEKEY_WHEEL_TIME_TO_MAX 100
 
 /* added to try resolve wake up issue: */
-// #define SPLIT_USB_DETECT
-// #define USB_SUSPEND_WAKEUP_DELAY 800
+#define SPLIT_USB_DETECT
+#define USB_SUSPEND_WAKEUP_DELAY 800
+#define MASTER_RIGHT
 
 /* Tap dance */
 #define TAPPING_TERM 200

@@ -1,12 +1,50 @@
 #include QMK_KEYBOARD_H
 #include "keycodes.h"
 
+
+enum custom_keys {
+    // SEND STRINGS
+    SS_SLOW_START = SAFE_RANGE, // might conflict with MOD TAP!!!
+        SS_WQ,
+    SS_FAST_START,
+        // Matching table `send_string_fast_actions`
+        SS_MAILW,
+        SS_MAILP,
+        SS_LNAME,
+        SS_FNAME,
+        SS_GITTT,
+        SS_GTPF,
+        SS_TX,
+        SS_NC,
+        SS_CK,
+        SS_HARO,
+
+        SS_THE,
+        SS_AND,
+
+        // NOT in the base table `send_string_fast_actions`
+        SS_GITCM,
+        SS_GITCMSCI,
+
+        SS_A_GRAVE,
+        SS_A_CIRCUMFLEX,
+        SS_E_GRAVE,
+        SS_E_AIGU,
+        SS_E_CIRCUMFLEX,
+        SS_I_CIRCUMFLEX,
+        SS_O_CIRCUMFLEX,
+        SS_U_CIRCUMFLEX,
+        SS_U_GRAVE,
+        SS_C_CEDI,
+    SS_END,
+};
+
 char send_string_actions[][10] = {
     "\e:wq\n",
 };
 
 char send_string_fast_actions[][20] = {
-    "xavier@nimblehq.co",
+    "xavv1m@gmail.com",
     "xavier@malparty.fr",
     "Malparty",
     "Xavier",
@@ -72,8 +110,8 @@ void tap_dance_tap_hold_reset(tap_dance_state_t *state, void *user_data) {
     { .fn = {NULL, tap_dance_tap_hold_finished, tap_dance_tap_hold_reset}, .user_data = (void *)&((tap_dance_tap_hold_layer_t){tap, hold, 0}), }
 
 tap_dance_action_t tap_dance_actions[] = {
-    [TD_BROWSER] = ACTION_TAP_DANCE_TAP_HOLD(LGUI(KC_3), LGUI(KC_6)),
-    [TD_GITFIGMA] = ACTION_TAP_DANCE_TAP_HOLD(LGUI(KC_2), LGUI(KC_5)),
+    [TD_BROWSER] = ACTION_TAP_DANCE_TAP_HOLD(LGUI(KC_1), LGUI(KC_6)),
+    [TD_GITFIGMA] = ACTION_TAP_DANCE_TAP_HOLD(LGUI(KC_5), LGUI(KC_7)),
     [TD_RECTANGLE] = ACTION_TAP_DANCE_TAP_HOLD(LGUI(LOPT(LCTL(KC_LEFT))), LOPT(LCTL(KC_ENT))),
 };
 
@@ -114,55 +152,61 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     else if (keycode == SS_E_GRAVE) {
         if (record->event.pressed) {
-            SEND_STRING(SS_LOPT("`") "e");
+            SEND_STRING(SS_TAP(X_CAPS) "`e");
         }
         return false;
     }
     else if (keycode == SS_A_GRAVE) {
         if (record->event.pressed) {
-            SEND_STRING(SS_LOPT("`") "a");
+            SEND_STRING(SS_TAP(X_CAPS) "`a");
         }
         return false;
     }
     else if (keycode == SS_U_GRAVE) {
         if (record->event.pressed) {
-            SEND_STRING(SS_LOPT("`") "u");
+            SEND_STRING(SS_TAP(X_CAPS) "`u");
         }
         return false;
     }
     else if (keycode == SS_E_AIGU) {
         if (record->event.pressed) {
-            SEND_STRING(SS_LOPT("e") "e");
+            SEND_STRING(SS_TAP(X_CAPS) "'e");
         }
         return false;
     }
     else if (keycode == SS_A_CIRCUMFLEX) {
         if (record->event.pressed) {
-            SEND_STRING(SS_LOPT("i") "a");
+            SEND_STRING(SS_TAP(X_CAPS) "^a");
         }
         return false;
     }
     else if (keycode == SS_E_CIRCUMFLEX) {
         if (record->event.pressed) {
-            SEND_STRING(SS_LOPT("i") "e");
+            SEND_STRING(SS_TAP(X_CAPS) "^e");
         }
         return false;
     }
     else if (keycode == SS_I_CIRCUMFLEX) {
         if (record->event.pressed) {
-            SEND_STRING(SS_LOPT("i") "i");
+            SEND_STRING(SS_TAP(X_CAPS) "^i");
         }
         return false;
     }
     else if (keycode == SS_U_CIRCUMFLEX) {
         if (record->event.pressed) {
-            SEND_STRING(SS_LOPT("i") "u");
+            SEND_STRING(SS_TAP(X_CAPS) "^u");
         }
         return false;
     }
     else if (keycode == SS_O_CIRCUMFLEX) {
         if (record->event.pressed) {
-            SEND_STRING(SS_LOPT("i") "o");
+            SEND_STRING(SS_TAP(X_CAPS) "^o");
+        }
+        return false;
+    }
+    else if (keycode == SS_C_CEDI) {
+        if (record->event.pressed) {
+            SEND_STRING(SS_TAP(X_CAPS) ",c");
         }
         return false;
     }
@@ -190,7 +234,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //|------------------+------------------+------------------+------------------+-----------------|   |------------------+------------------+------------------+------------------+------------------|
              KC_NO, KC_ESC      ,       KC_W       ,       KC_F       ,       KC_P       ,      KC_B       ,           KC_J       ,      KC_L        ,       KC_U       ,       KC_Y       ,LT(_SENDSTR, KC_Q),KC_NO,
     //|------------------+------------------+------------------+------------------+-----------------|   |------------------+------------------+------------------+------------------+------------------|
-       KC_NO, MT(MOD_LGUI, KC_A),MT(MOD_LALT, KC_R),MT(MOD_LCTL, KC_S),MT(MOD_LSFT, KC_T),      KC_G       ,           KC_M       ,MT(MOD_RSFT, KC_N),MT(MOD_RCTL, KC_E),MT(MOD_RALT, KC_I),MT(MOD_RGUI, KC_O),KC_NO,
+       KC_NO, MT(MOD_LCTL, KC_A),MT(MOD_LALT, KC_R),MT(MOD_LGUI, KC_S),MT(MOD_LSFT, KC_T),      KC_G       ,           KC_M       ,MT(MOD_RSFT, KC_N),MT(MOD_RGUI, KC_E),MT(MOD_RALT, KC_I),MT(MOD_RCTL, KC_O),KC_NO,
     //|------------------+------------------+------------------+------------------+-----------------|   |------------------+------------------+------------------+------------------+------------------|
               KC_NO, LT(_MOUSE2, KC_Z)       ,       KC_X       ,       KC_C       ,       KC_D       ,       KC_V      ,           KC_K       ,      KC_H        ,     KC_COMM      ,      KC_DOT      ,LT(_RGB, KC_SLSH) ,KC_NO,
     //|------------------+------------------+------------------+------------------+-----------------|   |------------------+------------------+------------------+------------------+------------------|
@@ -199,21 +243,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //                                           |-------------------------+-------------------------| |-------------------------+-------------------------|
     ),
 	[_MOUSE] = LAYOUT_split_3x6_3(
-            KC_NO, TD(TD_GITFIGMA), TD(TD_BROWSER), LGUI(KC_1), LGUI(KC_7), LGUI(KC_4),        KC_NO,     KC_NO,      KC_NO,      KC_NO,      KC_NO,  KC_NO,
-            KC_NO, KC_LGUI,         KC_LOPT,        KC_LCTL,    KC_LSFT,    LGUI(LSFT(KC_E)),  KC_NO,     KC_MS_L,    KC_MS_D,    KC_MS_U,    KC_MS_R,KC_NO,
+            KC_NO, TD(TD_GITFIGMA), TD(TD_BROWSER), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4),        KC_NO,     KC_NO,      KC_NO,      KC_NO,      KC_NO,  KC_NO,
+            KC_NO, KC_LCTL,         KC_LOPT,        KC_LGUI,    KC_LSFT,    LCTL(LSFT(KC_E)),  KC_NO,     KC_MS_L,    KC_MS_D,    KC_MS_U,    KC_MS_R,KC_NO,
             KC_NO, KC_LEFT,         KC_UP,          KC_DOWN,    KC_RGHT,    TD(TD_RECTANGLE),  KC_BTN3,   KC_WH_L,    KC_WH_U,    KC_WH_D,    KC_WH_R,KC_NO,
                                                          KC_TRNS, KC_TRNS,    KC_NO,             KC_BTN2,   KC_BTN1, KC_NO
         ),
 	[_MOUSE2] = LAYOUT_split_3x6_3(
-            KC_NO, KC_NO,   KC_NO,    KC_NO,    KC_NO,    KC_NO,         KC_NO,     KC_NO,    KC_NO,    KC_NO,    KC_NO,  KC_NO,
-            KC_NO, KC_NO,   KC_LOPT,  KC_NO,    KC_NO,    KC_NO,         KC_NO,     KC_NO,    KC_NO,    KC_NO,    KC_NO,  KC_NO,
-            KC_NO, KC_TRNS, KC_BTN4,  KC_BTN2,  KC_BTN1,  KC_NO,         KC_NO,     KC_NO,    KC_NO,    KC_NO,    KC_NO,  KC_NO,
-                                      KC_TRNS, KC_TRNS,    KC_NO,          KC_BTN2,   KC_BTN1, KC_NO
+            KC_NO, KC_DEL,  KC_NO,    KC_F2,    KC_F12,   KC_F11,         KC_NO,     KC_NO,    KC_NO,    KC_NO,    KC_NO,  KC_NO,
+            KC_NO, KC_LCTL, KC_LOPT,  KC_NO,    KC_NO,    KC_PSCR,        KC_NO,     KC_NO,    KC_NO,    KC_NO,    KC_NO,  KC_NO,
+            KC_NO, KC_TRNS, KC_BTN6,  KC_BTN2,  KC_BTN1,  KC_NO,          KC_NO,     KC_NO,    KC_NO,    KC_NO,    KC_NO,  KC_NO,
+                                      KC_TRNS, KC_TRNS,    KC_NO,         KC_BTN2,   KC_BTN1, KC_NO
         ),
 	[_NAV] = LAYOUT_split_3x6_3(
-            KC_NO, LGUI(KC_Z), LGUI(KC_X), LGUI(KC_C), LGUI(KC_V), RSG(KC_Z),      KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,KC_NO,
-        KC_NO, KC_LGUI, KC_LOPT, KC_LCTL, KC_LSFT, LGUI(KC_A),                     KC_NO, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT,KC_NO,
-            KC_NO, LGUI(LSFT(KC_T)), LCTL(KC_C), KC_BSPC, KC_ENT, KC_BTN1,         KC_NO, KC_HOME, KC_PGDN, KC_PGUP, KC_END,KC_NO,
+            KC_NO, LCTL(KC_Z), LCTL(KC_X), LCTL(KC_C), LCTL(KC_V), LCTL(KC_Y),      KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,KC_NO,
+        KC_NO, KC_LCTL, KC_LOPT, KC_LGUI, KC_LSFT, LCTL(KC_A),                     KC_NO, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT,KC_NO,
+            KC_NO, LCTL(LSFT(KC_T)), LCTL(KC_C), KC_BSPC, KC_ENT, KC_BTN1,         KC_NO, KC_HOME, KC_PGDN, KC_PGUP, KC_END,KC_NO,
                                         KC_TRNS, KC_NO, KC_TRNS,                     KC_TRNS, KC_TRNS, KC_NO
         ),
 	[_NUM] = LAYOUT_split_3x6_3(
@@ -223,10 +267,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 KC_TRNS, KC_0, KC_DOT,                               KC_TRNS, KC_NO, KC_NO
         ),
 	[_SYM] = LAYOUT_split_3x6_3(
-            KC_NO, KC_LCBR, KC_AMPR, KC_ASTR, KC_MINS, KC_RCBR,                    KC_NO, KC_UNDS, KC_NO, KC_NO, KC_TRNS,KC_NO,
-            KC_NO, KC_COLN, KC_DLR, KC_PERC, KC_CIRC, KC_PLUS,                     KC_NO, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,KC_NO,
+            KC_NO, KC_LCBR, KC_AMPR, KC_ASTR, KC_MINS, KC_RCBR,                    TO(_GAME), TO(_GAME),   TO(_GAME), TO(_GAME), TO(_GAME), KC_NO,
+            KC_NO, KC_COLN, KC_DLR, KC_PERC, KC_CIRC, KC_PLUS,                     KC_NO, KC_LSFT, KC_LGUI, KC_LALT, KC_LCTL,KC_NO,
             KC_NO, KC_TILD, KC_EXLM, KC_AT, KC_HASH, KC_PIPE,                      KC_NO, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT,KC_NO,
                                      KC_TRNS, KC_LPRN, KC_RPRN,                      KC_NO, KC_TRNS, KC_NO
+        ),
+    [_GAME] = LAYOUT_split_3x6_3(
+        KC_NO, KC_C, KC_Q, KC_W, KC_E, KC_R,                 KC_NO, KC_NO,   KC_NO,   KC_NO,   KC_NO, KC_NO,
+        KC_NO, KC_LSFT, KC_A, KC_S, KC_D, KC_F,                 KC_NO, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_LSFT, 
+        KC_NO, KC_1, KC_2, KC_3, KC_4, KC_5,                  KC_NO, KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_NO, 
+                       KC_NO, KC_LCTL, KC_SPC,                 KC_TRNS, KC_TRNS, TO(_BASE)
         ),
 	[_SENDSTR] = LAYOUT_split_3x6_3(
             KC_NO, SS_FNAME, SS_LNAME, SS_NC, SS_TX,    SS_GITCM,                  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,KC_NO,
