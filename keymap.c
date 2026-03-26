@@ -112,7 +112,6 @@ void tap_dance_tap_hold_reset(tap_dance_state_t *state, void *user_data) {
 tap_dance_action_t tap_dance_actions[] = {
     [TD_BROWSER] = ACTION_TAP_DANCE_TAP_HOLD(LGUI(KC_1), LGUI(KC_6)),
     [TD_GITFIGMA] = ACTION_TAP_DANCE_TAP_HOLD(LGUI(KC_5), LGUI(KC_7)),
-    [TD_RECTANGLE] = ACTION_TAP_DANCE_TAP_HOLD(LGUI(LOPT(LCTL(KC_LEFT))), LOPT(LCTL(KC_ENT))),
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -128,9 +127,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case TD(TD_QUOTE_SENDS):
         case TD(TD_BROWSER):
         case TD(TD_GITFIGMA):
-        case TD(TD_RECTANGLE):
             action = &tap_dance_actions[TD_INDEX(keycode)];
-            if (!record->event.pressed && action->state.count && !action->state.finished) {
+            tap_dance_state_t *td_state = tap_dance_get_state(TD_INDEX(keycode));
+            if (!record->event.pressed && td_state->count && !td_state->finished) {
                 tap_dance_tap_hold_layer_t *tap_hold = (tap_dance_tap_hold_layer_t *)action->user_data;
                 tap_code16(tap_hold->tap);
             }
@@ -244,20 +243,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 	[_MOUSE] = LAYOUT_split_3x6_3(
             KC_NO, TD(TD_GITFIGMA), TD(TD_BROWSER), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4),        KC_NO,     KC_NO,      KC_NO,      KC_NO,      KC_NO,  KC_NO,
-            KC_NO, KC_LCTL,         KC_LOPT,        KC_LGUI,    KC_LSFT,    LCTL(LSFT(KC_E)),  KC_NO,     KC_MS_L,    KC_MS_D,    KC_MS_U,    KC_MS_R,KC_NO,
-            KC_NO, KC_LEFT,         KC_UP,          KC_DOWN,    KC_RGHT,    TD(TD_RECTANGLE),  KC_BTN3,   KC_WH_L,    KC_WH_U,    KC_WH_D,    KC_WH_R,KC_NO,
-                                                         KC_TRNS, KC_TRNS,    KC_NO,             KC_BTN2,   KC_BTN1, KC_NO
+            KC_NO, KC_LCTL,         KC_LOPT,        KC_LGUI,    KC_LSFT,    LCTL(LSFT(KC_E)),  KC_NO,     MS_LEFT,    MS_DOWN,    MS_UP,      MS_RGHT, KC_NO,
+            KC_NO, KC_LEFT,         KC_UP,          KC_DOWN,    KC_RGHT,    LGUI(KC_S),  MS_BTN3,   MS_WHLL,    MS_WHLU,    MS_WHLD,    MS_WHLR, KC_NO,
+                                                         KC_TRNS, KC_TRNS,    KC_NO,             MS_BTN2,   MS_BTN1, KC_NO
         ),
 	[_MOUSE2] = LAYOUT_split_3x6_3(
             KC_NO, KC_DEL,  KC_NO,    KC_F2,    KC_F12,   KC_F11,         KC_NO,     KC_NO,    KC_NO,    KC_NO,    KC_NO,  KC_NO,
             KC_NO, KC_LCTL, KC_LOPT,  KC_NO,    KC_NO,    KC_PSCR,        KC_NO,     KC_NO,    KC_NO,    KC_NO,    KC_NO,  KC_NO,
-            KC_NO, KC_TRNS, KC_BTN6,  KC_BTN2,  KC_BTN1,  KC_NO,          KC_NO,     KC_NO,    KC_NO,    KC_NO,    KC_NO,  KC_NO,
-                                      KC_TRNS, KC_TRNS,    KC_NO,         KC_BTN2,   KC_BTN1, KC_NO
+            KC_NO, KC_TRNS, MS_BTN6,  MS_BTN2,  MS_BTN1,  KC_NO,          KC_NO,     KC_NO,    KC_NO,    KC_NO,    KC_NO,  KC_NO,
+                                      KC_TRNS, KC_TRNS,    KC_NO,         MS_BTN2,   MS_BTN1, KC_NO
         ),
 	[_NAV] = LAYOUT_split_3x6_3(
             KC_NO, LCTL(KC_Z), LCTL(KC_X), LCTL(KC_C), LCTL(KC_V), LCTL(KC_Y),      KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,KC_NO,
         KC_NO, KC_LCTL, KC_LOPT, KC_LGUI, KC_LSFT, LCTL(KC_A),                     KC_NO, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT,KC_NO,
-            KC_NO, LCTL(LSFT(KC_T)), LCTL(KC_C), KC_BSPC, KC_ENT, KC_BTN1,         KC_NO, KC_HOME, KC_PGDN, KC_PGUP, KC_END,KC_NO,
+            KC_NO, LCTL(LSFT(KC_T)), LCTL(KC_C), KC_BSPC, KC_ENT, MS_BTN1,         KC_NO, KC_HOME, KC_PGDN, KC_PGUP, KC_END,KC_NO,
                                         KC_TRNS, KC_NO, KC_TRNS,                     KC_TRNS, KC_TRNS, KC_NO
         ),
 	[_NUM] = LAYOUT_split_3x6_3(
