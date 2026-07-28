@@ -29,5 +29,13 @@
 
 /* Tap dance */
 #define TAPPING_TERM 200
-#define TAPPING_TERM_PER_KEY
 #define QUICK_TAP_TERM 0
+
+/* Home row mods: reduce accidental modifiers.
+   Chordal Hold    -> a same-hand chord settles as a tap (see chordal_hold_layout).
+   Permissive Hold -> cross-hand chords hold without waiting out TAPPING_TERM.
+   Flow Tap        -> a tap-hold pressed <150ms after an alpha settles as a tap.
+                      Comment out to try Chordal Hold on its own. */
+#define CHORDAL_HOLD
+#define PERMISSIVE_HOLD
+#define FLOW_TAP_TERM 150

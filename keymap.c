@@ -83,11 +83,10 @@ void tap_dance_tap_hold_finished(tap_dance_state_t *state, void *user_data) {
     tap_dance_tap_hold_layer_t *tap_hold = (tap_dance_tap_hold_layer_t *)user_data;
 
     if (state->pressed) {
-        if (state->count == 1
-#ifndef PERMISSIVE_HOLD
-            && !state->interrupted
-#endif
-        ) {
+        // The !interrupted check is unconditional on purpose: PERMISSIVE_HOLD is
+        // enabled for the home row mods, but the tap dances still want an
+        // interrupted single press to resolve as a tap.
+        if (state->count == 1 && !state->interrupted) {
             register_code16(tap_hold->hold);
             tap_hold->held = tap_hold->hold;
         } else {
@@ -113,6 +112,42 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_BROWSER] = ACTION_TAP_DANCE_TAP_HOLD(LGUI(KC_1), LGUI(KC_6)),
     [TD_GITFIGMA] = ACTION_TAP_DANCE_TAP_HOLD(LGUI(KC_5), LGUI(KC_7)),
 };
+
+// CHORDAL HOLD
+// Same-hand shortcuts that the opposite-hands rule would otherwise turn into
+// plain letters. Ctrl+Z is already covered: Z is exempt in chordal_hold_layout.
+bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t *tap_hold_record,
+                      uint16_t other_keycode, keyrecord_t *other_record) {
+    switch (tap_hold_keycode) {
+        case MT(MOD_LCTL, KC_A):
+            switch (other_keycode) {
+                case KC_X:
+                case KC_C:
+                case KC_V:
+                    return true;
+            }
+            break;
+    }
+    return get_chordal_hold_default(tap_hold_record, other_record);
+}
+
+// FLOW TAP
+// The default is_flow_tap_key() counts KC_SPC, which would force LT(_NAV, KC_SPC)
+// to tap when reached straight out of a word. Exempt the thumbs as tap-hold keys
+// while keeping KC_SPC valid as a *previous* key.
+uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t *record, uint16_t prev_keycode) {
+    switch (keycode) {
+        case LT(_MOUSE, KC_TAB):
+        case LT(_NAV, KC_SPC):
+        case LT(_NUM, KC_BSPC):
+        case LT(_SYM, KC_ENTER):
+            return 0;
+    }
+    if (is_flow_tap_key(keycode) && is_flow_tap_key(prev_keycode)) {
+        return FLOW_TAP_TERM;
+    }
+    return 0;
+}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // TAP DANCE
@@ -290,3 +325,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              KC_TRNS, KC_NO, KC_NO,                         TO(_BASE), TO(_BASE), KC_NO
     )
 };
+
+// Handedness for CHORDAL_HOLD: 'L' left, 'R' right, '*' exempt from the rule.
+// The thumbs are exempt because every thumb layer-tap reaches a layer whose keys
+// sit on the same hand (e.g. LT(_NAV, KC_SPC) is left and _NAV's left half holds
+// LCTL(KC_Z/X/C/V)). LT(_MOUSE2, KC_Z) and LT(_RGB, KC_SLSH) are exempt for the
+// same reason.
+const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
+    LAYOUT_split_3x6_3(
+    //|-----+-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----+-----|
+        'L' , 'L' , 'L' , 'L' , 'L' , 'L' ,     'R' , 'R' , 'R' , 'R' , 'R' , 'R' ,
+    //|-----+-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----+-----|
+        'L' , 'L' , 'L' , 'L' , 'L' , 'L' ,     'R' , 'R' , 'R' , 'R' , 'R' , 'R' ,
+    //|-----+-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----+-----|
+        'L' , '*' , 'L' , 'L' , 'L' , 'L' ,     'R' , 'R' , 'R' , 'R' , '*' , 'R' ,
+    //|-----+-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----+-----|
+                          '*' , '*' , '*' ,     '*' , '*' , '*'
+    //                  |-----+-----+-----|   |-----+-----+-----|
+    );
