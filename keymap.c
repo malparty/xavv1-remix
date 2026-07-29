@@ -137,10 +137,15 @@ bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t *tap_hold_record,
 // while keeping KC_SPC valid as a *previous* key.
 uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t *record, uint16_t prev_keycode) {
     switch (keycode) {
+        // Thumbs, so a layer stays reachable however fast you got there.
         case LT(_MOUSE, KC_TAB):
         case LT(_NAV, KC_SPC):
         case LT(_NUM, KC_BSPC):
         case LT(_SYM, KC_ENTER):
+        // Shift, because capitals are typed mid-flow by definition. The other
+        // mods stay filtered: Ctrl/GUI/Alt are deliberate, never mid-word.
+        case MT(MOD_LSFT, KC_T):
+        case MT(MOD_RSFT, KC_N):
             return 0;
     }
     if (is_flow_tap_key(keycode) && is_flow_tap_key(prev_keycode)) {
