@@ -163,8 +163,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case TD(TD_BROWSER):
         case TD(TD_GITFIGMA):
             action = &tap_dance_actions[TD_INDEX(keycode)];
-            tap_dance_state_t *td_state = tap_dance_get_state(TD_INDEX(keycode));
-            if (!record->event.pressed && td_state->count && !td_state->finished) {
+            if (!record->event.pressed && action->state.count && !action->state.finished) {
                 tap_dance_tap_hold_layer_t *tap_hold = (tap_dance_tap_hold_layer_t *)action->user_data;
                 tap_code16(tap_hold->tap);
             }
